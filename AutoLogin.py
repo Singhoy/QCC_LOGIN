@@ -64,7 +64,7 @@ async def login(user_name, pass_word):
         await close_other(_browser, _page)
         await _page.click(".navi-btn", {"delay": 10})
         await asyncio.sleep(1)
-        await _page.click("#normalLogin", {"delay": 10})
+        await _page.click("#normalLoginPanel > div > :last-child", {"delay": 10})
         await asyncio.sleep(1)
         await _page.type("#nameNormal", user_name, {"delay": 10})
         await _page.type("#pwdNormal", pass_word, {"delay": 10})
