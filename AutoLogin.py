@@ -69,8 +69,7 @@ async def login(user_name, pass_word):
         await _page.type("#nameNormal", user_name, {"delay": 10})
         await _page.type("#pwdNormal", pass_word, {"delay": 10})
         await wait_slide(_page)
-        w = width * 0.8
-        await slide_block(_page, w)
+        await slide_block(_page)
         t = await _page.content()
         r_t = re.findall("验证通过", t)
         if r_t:
@@ -88,10 +87,11 @@ async def login(user_name, pass_word):
     return cookies
 
 
-async def slide_block(page, width):
+async def slide_block(page):
     # 自动拖动滑块，超过9次还没通过则验证失败
     regex = re.compile('验证通过')
     tmp = 0
+    box = {"x": 625, "y": 358}
     while tmp < 9:
         slider = await page.Jx("//div[@class='nc_scale']/span")
         print(slider)
