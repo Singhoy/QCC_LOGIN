@@ -54,7 +54,7 @@ async def login(user_name, pass_word):
         () =>{
             Object.defineProperties(navigator,{
                 webdriver:{
-                get: () => false
+                get: () => undefined
                 }
             })
         }
@@ -98,7 +98,14 @@ async def slide_block(page, width):
         await slider[0].hover()
         print("move")
         await page.mouse.down()
-        await page.mouse.move(width, 0, {"steps": randint(80, 120)})
+        step = randint(8, 16)
+        tmp = 0
+        while tmp < step:
+            tmp += 1
+            x = box["x"] + tmp * randint(10, 15)
+            y = box["y"] + tmp
+            await page.mouse.move(x, y)
+        await page.mouse.move(box['x'] + 400, box['y'])
         await page.mouse.up()
         await asyncio.sleep(3)
         t = await page.content()
