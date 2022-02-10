@@ -50,7 +50,7 @@ async def login(user_name, pass_word):
     width, height = screen_size()
     await _page.setViewport({'width': width, 'height': height})
     await _page.setJavaScriptEnabled(True)
-    await _page.evaluate("""
+    await _page.evaluateOnNewDocument("""
         () =>{
             Object.defineProperties(navigator,{
                 webdriver:{
